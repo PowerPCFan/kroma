@@ -1,0 +1,34 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kroma"
+version = "1.0.0"
+description = "A lightweight and powerful colors library for terminal output in Python."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "AGPL-3.0-only"
+license-files = ["LICEN[CS]E*"]
+authors = [
+    {name = "PowerPCFan", email = "charlies.retro.computing@gmail.com"}
+]
+maintainers = [
+    {name = "PowerPCFan", email = "charlies.retro.computing@gmail.com"}
+]
+dependencies = [
+    # Put dependencies here
+]
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+Homepage = "https://github.com/PowerPCFan/kroma"
+Issues = "https://github.com/PowerPCFan/kroma/issues"
