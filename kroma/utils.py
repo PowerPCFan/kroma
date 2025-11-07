@@ -1,3 +1,4 @@
+from typing import Callable
 from .ansi_tools import ansi_supported as _ansi_supported
 from .enums import HTMLColors, ANSIColors, StyleType, RGB, TextFormat
 from .gv import RESET, ANSI
@@ -46,11 +47,16 @@ def _convert_html_hex_to_ansi(text: str, color: HTMLColors | str, type: StyleTyp
 
 
 def _get_ansi_color_code(text: str, color: ANSIColors, type: StyleType) -> str:
-    return _get_color_if_supported(color.value) + _fix_text(text) + _get_color_if_supported(RESET)
+    color_code = _get_color_if_supported(color.value)
+    if type == StyleType.BACKGROUND:
+        color_code = color_code.replace("3", "4").replace("9", "10")
+    return color_code + _fix_text(text) + _get_color_if_supported(RESET)
 
 
 def _get_ansi_color_code_with_formatting(text: str, color: ANSIColors, type: StyleType, formats: list[TextFormat] | None = None) -> str:
     color_code = _get_color_if_supported(color.value)
+    if type == StyleType.BACKGROUND:
+        color_code = color_code.replace("3", "4").replace("9", "10")
     format_codes = "".join([_get_color_if_supported(fmt.value) for fmt in formats]) if formats else ""
     reset_code = _get_color_if_supported(RESET)
     return color_code + format_codes + _fix_text(text) + reset_code
@@ -78,3 +84,48 @@ def _apply_text_formatting(text: str, formats: list[TextFormat] | None = None) -
 
     format_codes = "".join([_get_color_if_supported(fmt.value) for fmt in formats])
     return format_codes + _fix_text(text) + _get_color_if_supported(RESET)
+
+
+def _style_base(
+    text: str,
+    foreground: HTMLColors | ANSIColors | str | None,
+    background: HTMLColors | ANSIColors | str | None,
+    bold: bool,
+    italic: bool,
+    underline: bool,
+    strikethrough: bool,
+    color_func: Callable[[str, HTMLColors | ANSIColors | str, StyleType], str],
+    color_func_with_formatting: Callable[[str, HTMLColors | ANSIColors | str, StyleType, list[TextFormat] | None], str]
+) -> str:
+    formats = []
+    if bold:
+        formats.append(TextFormat.BOLD)
+    if italic:
+        formats.append(TextFormat.ITALIC)
+    if underline:
+        formats.append(TextFormat.UNDERLINE)
+    if strikethrough:
+        formats.append(TextFormat.STRIKETHROUGH)
+
+    if foreground is None and background is None:
+        if formats:
+            return _apply_text_formatting(text, formats)
+        else:
+            return text
+    elif foreground is not None and background is None:
+        if formats:
+            return color_func_with_formatting(text, foreground, StyleType.FOREGROUND, formats)
+        else:
+            return color_func(text, foreground, StyleType.FOREGROUND)
+    elif foreground is None and background is not None:
+        if formats:
+            return color_func_with_formatting(text, background, StyleType.BACKGROUND, formats)
+        else:
+            return color_func(text, background, StyleType.BACKGROUND)
+    else:
+        assert foreground is not None and background is not None
+        if formats:
+            fg_formatted = color_func_with_formatting(text, foreground, StyleType.FOREGROUND, formats)
+            return color_func_with_formatting(fg_formatted, background, StyleType.BACKGROUND, None)
+        else:
+            return color_func(color_func(text, foreground, StyleType.FOREGROUND), background, StyleType.BACKGROUND)

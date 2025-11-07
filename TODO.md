@@ -1,2 +1,1 @@
-- Clean up codebase
-- Fix issues with background not working / colors not being applied properly
+- Improve typing and safety internally with the style / style base function
