@@ -1,1 +1,2 @@
 - Clean up codebase
+- Fix issues with background not working / colors not being applied properly
