@@ -1,5 +1,31 @@
-from enum import Enum
+from enum import Enum, auto
 from typing import NamedTuple
+from .gv import ANSI
+
+
+class StyleType(Enum):
+    FOREGROUND = auto()
+    BACKGROUND = auto()
+
+
+class ANSIColors(Enum):
+    BLACK = f"{ANSI}30m"
+    RED = f"{ANSI}31m"
+    GREEN = f"{ANSI}32m"
+    YELLOW = f"{ANSI}33m"
+    BLUE = f"{ANSI}34m"
+    MAGENTA = f"{ANSI}35m"
+    CYAN = f"{ANSI}36m"
+    WHITE = f"{ANSI}37m"
+
+    BRIGHT_BLACK = f"{ANSI}90m"
+    BRIGHT_RED = f"{ANSI}91m"
+    BRIGHT_GREEN = f"{ANSI}92m"
+    BRIGHT_YELLOW = f"{ANSI}93m"
+    BRIGHT_BLUE = f"{ANSI}94m"
+    BRIGHT_MAGENTA = f"{ANSI}95m"
+    BRIGHT_CYAN = f"{ANSI}96m"
+    BRIGHT_WHITE = f"{ANSI}97m"
 
 
 class RGB(NamedTuple):
@@ -8,7 +34,7 @@ class RGB(NamedTuple):
     b: int
 
 
-class HTMLColor(Enum):
+class HTMLColors(Enum):
     # basic colors
     BLACK = "000000"
     SILVER = "C0C0C0"
