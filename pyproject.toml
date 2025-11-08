@@ -21,7 +21,7 @@ dependencies = [
 ]
 classifiers = [
     # Uncomment to prohibit uploading
-    "Private :: Do Not Upload",
+    # "Private :: Do Not Upload",
 
     # Development Status
     "Development Status :: 5 - Production/Stable",
