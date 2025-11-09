@@ -4,14 +4,15 @@ from .utils import _convert_html_hex_to_ansi, _convert_html_hex_to_ansi_with_for
 
 class CustomStyle:
     def __init__(
-            self,
-            foreground: str | HTMLColors | None = None,
-            background: str | HTMLColors | None = None,
-            bold: bool = False,
-            italic: bool = False,
-            underline: bool = False,
-            strikethrough: bool = False,
-            swap_foreground_background: bool = False
+        self,
+        *,  # Enforce keyword arguments from here on
+        foreground: str | HTMLColors | None = None,
+        background: str | HTMLColors | None = None,
+        bold: bool = False,
+        italic: bool = False,
+        underline: bool = False,
+        strikethrough: bool = False,
+        swap_foreground_background: bool = False
     ):
 
         self.kwargs = {
@@ -30,6 +31,7 @@ class CustomStyle:
 
 def style(
     text: str,
+    *,  # Enforce keyword arguments from here on
     foreground: str | HTMLColors | None = None,
     background: str | HTMLColors | None = None,
     bold: bool = False,
@@ -39,7 +41,7 @@ def style(
     swap_foreground_background: bool = False
 ) -> str:
     return _style_base(
-        text=text,
+        text,
         foreground=foreground,
         background=background,
         bold=bold,

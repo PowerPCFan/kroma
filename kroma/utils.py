@@ -104,6 +104,7 @@ def _apply_text_formatting(text: str, formats: list[TextFormat] | None = None) -
 
 def _style_base(
     text: str,
+    *,  # Enforce keyword arguments from here on
     foreground: HTMLColors | ANSIColors | str | None,
     background: HTMLColors | ANSIColors | str | None,
     bold: bool,
