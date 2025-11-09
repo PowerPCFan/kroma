@@ -39,6 +39,6 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/PowerPCFan/kroma"
+Documentation = "https://www.powerpcfan.xyz/docs/kroma"
 Repository = "https://github.com/PowerPCFan/kroma"
 Issues = "https://github.com/PowerPCFan/kroma/issues"
