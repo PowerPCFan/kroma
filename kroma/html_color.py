@@ -2,6 +2,30 @@ from .enums import HTMLColors, RGB
 from .utils import _convert_html_hex_to_ansi, _convert_html_hex_to_ansi_with_formatting, _style_base, _convert_hex_code_to_rgb, _convert_rgb_to_hex_code, _clamp
 
 
+class CustomStyle:
+    def __init__(self,
+            foreground: str | HTMLColors | None = None,
+            background: str | HTMLColors | None = None,
+            bold: bool = False,
+            italic: bool = False,
+            underline: bool = False,
+            strikethrough: bool = False,
+            swap_foreground_background: bool = False
+        ):
+        
+        self.kwargs = {
+            "foreground": foreground,
+            "background": background,
+            "bold": bold,
+            "italic": italic,
+            "underline": underline,
+            "strikethrough": strikethrough,
+            "swap_foreground_background": swap_foreground_background
+        }
+        
+    def __call__(self, text: str) -> str:
+        return style(text, **self.kwargs)
+
 def style(
     text: str,
     foreground: str | HTMLColors | None = None,
