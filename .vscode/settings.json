@@ -1,0 +1,4 @@
+{
+    "terminal.integrated.minimumContrastRatio": 1,
+    "python.analysis.typeCheckingMode": "standard"
+}
