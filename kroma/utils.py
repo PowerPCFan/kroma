@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Any
 from .ansi_tools import ansi_supported as _ansi_supported
 from .enums import HTMLColors, ANSIColors, StyleType, RGB, TextFormat
 from .gv import RESET, ANSI
@@ -111,8 +111,8 @@ def _style_base(
     underline: bool,
     strikethrough: bool,
     swap_foreground_background: bool,
-    color_func: Callable[[str, HTMLColors | ANSIColors | str, StyleType], str],
-    color_func_with_formatting: Callable[[str, HTMLColors | ANSIColors | str, StyleType, list[TextFormat] | None], str]
+    color_func: Callable[[str, Any, StyleType], str],
+    color_func_with_formatting: Callable[[str, Any, StyleType, list[TextFormat] | None], str]
 ) -> str:
     formats = []
     if bold:

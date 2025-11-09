@@ -3,7 +3,8 @@ from .utils import _convert_html_hex_to_ansi, _convert_html_hex_to_ansi_with_for
 
 
 class CustomStyle:
-    def __init__(self,
+    def __init__(
+            self,
             foreground: str | HTMLColors | None = None,
             background: str | HTMLColors | None = None,
             bold: bool = False,
@@ -11,8 +12,8 @@ class CustomStyle:
             underline: bool = False,
             strikethrough: bool = False,
             swap_foreground_background: bool = False
-        ):
-        
+    ):
+
         self.kwargs = {
             "foreground": foreground,
             "background": background,
@@ -22,9 +23,10 @@ class CustomStyle:
             "strikethrough": strikethrough,
             "swap_foreground_background": swap_foreground_background
         }
-        
+
     def __call__(self, text: str) -> str:
         return style(text, **self.kwargs)
+
 
 def style(
     text: str,
