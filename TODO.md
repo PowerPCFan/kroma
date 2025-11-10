@@ -4,21 +4,22 @@
 
 ### High Priority
 
-- Color Palettes
-  - Dataclass-based palettes like Gruvbox.error(), Gruvbox.warning(), etc
-  - These can utilize the existing CustomStyle class
-
 - Gradients
-  - Using True Color
-  - Linear foreground & background gradients
-  - Controllable stops
+  - Using True Color:
+    - Linear foreground & background gradients
+    - Controllable stops
+
+- Make it so you can mix ANSI and HTML colors
 
 ### Medium Priority
 
-- True Color support detection (if possible)
+- In Docs / Readme: Highlight USPs (unique selling points)
 
 - 256-Color Support (8-bit)
   - Great for if you want a wider range of colors but need compatibility with older terminals / don't want to use True Color
+
+- Inline markup like Rich
+  - i'm not a fan of it but it's a very popular option
 
 ### Color Utilities / Helpers
 - Contrast / luminance checks (is_light(), contrast())
