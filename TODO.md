@@ -28,4 +28,3 @@
 
 ## Improvements / Fixes
 - Break up functions and improve code in general
-- Possibly combine the two style() functions, since it's not really necessary to have both and it complicates things a lot
