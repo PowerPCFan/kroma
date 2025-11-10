@@ -4,7 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "kroma"
-version = "v2.0.0"
+# at one point i wiped a bunch of releases off of pypi so it starts at 2.0.1
+version = "v2.0.1"
 description = "A lightweight and powerful colors library for terminal output in Python."
 readme = "README.md"
 requires-python = ">=3.10"
