@@ -1,4 +1,4 @@
-from .html_color import CustomStyle
+from .styles import CustomStyle
 
 
 def _set_global_terminal_colors(*, bg: str, fg: str):
