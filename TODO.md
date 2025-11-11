@@ -15,6 +15,7 @@
   - Great for if you want a wider range of colors but need compatibility with older terminals / don't want to use True Color
 - Inline markup like Rich
   - i'm not a fan of it but it's a very popular option
+- Write unit tests
 
 ### Color Utilities / Helpers
 - Contrast / luminance checks (is_light(), contrast())
