@@ -1,4 +1,4 @@
 # kroma
 
 ## Docs
-https://www.powerpcfan.xyz/docs/kroma
+https://www.powerpcfan.xyz/docs/kroma/v2/

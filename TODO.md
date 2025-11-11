@@ -4,12 +4,9 @@
 
 ### High Priority
 
-- Gradients
-  - Using True Color:
-    - Linear foreground & background gradients
-    - Controllable stops
-
 - Make it so you can mix ANSI and HTML colors
+
+- Write docstrings for quick reference without having to go to the docs
 
 ### Medium Priority
 

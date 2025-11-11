@@ -1,4 +1,3 @@
-from typing import Union
 from enum import Enum
 from .enums import ANSIColors, HTMLColors, RGB
 from .utils import (
@@ -52,8 +51,8 @@ class CustomStyle:
     def __init__(
         self,
         *,  # Enforce keyword arguments from here on
-        foreground: Union[ANSIColors, str, HTMLColors, None] = None,
-        background: Union[ANSIColors, str, HTMLColors, None] = None,
+        foreground: str | ANSIColors | HTMLColors | None = None,
+        background: str | ANSIColors | HTMLColors | None = None,
         bold: bool = False,
         italic: bool = False,
         underline: bool = False,
@@ -78,8 +77,8 @@ class CustomStyle:
 def style(
     text: str,
     *,  # Enforce keyword arguments from here on
-    foreground: Union[ANSIColors, str, HTMLColors, None] = None,
-    background: Union[ANSIColors, str, HTMLColors, None] = None,
+    foreground: str | ANSIColors | HTMLColors | None = None,
+    background: str | ANSIColors | HTMLColors | None = None,
     bold: bool = False,
     italic: bool = False,
     underline: bool = False,
@@ -118,7 +117,7 @@ def style(
         raise Exception("An unknown error has occurred.")
 
 
-def lighten(color: Union[HTMLColors, str], percentage: float) -> str:
+def lighten(color: str | HTMLColors, percentage: float) -> str:
     p = percentage / 100.0
     hex_color = (color.value if isinstance(color, HTMLColors) else color)
 
@@ -131,7 +130,7 @@ def lighten(color: Union[HTMLColors, str], percentage: float) -> str:
     return _convert_rgb_to_hex_code(RGB(r=new_r, g=new_g, b=new_b))
 
 
-def darken(color: Union[HTMLColors, str], percentage: float) -> str:
+def darken(color: str | HTMLColors, percentage: float) -> str:
     p = percentage / 100.0
     hex_color = (color.value if isinstance(color, HTMLColors) else color)
 
