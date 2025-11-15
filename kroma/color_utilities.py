@@ -1,4 +1,5 @@
 import random
+import secrets
 from .enums import HTMLColors, RGB
 # from .enums import HSL
 from .utils import (
@@ -71,7 +72,8 @@ def convert_to_grayscale(color: str | HTMLColors) -> str:
 
 def random_color() -> str:
     def _rdm() -> int:
-        return random.randint(0, 255)
+        # return random.randint(0, 255)
+        return secrets.randbelow(256)
 
     return _convert_rgb_to_hex_code(RGB(r=_rdm(), g=_rdm(), b=_rdm()))
 
