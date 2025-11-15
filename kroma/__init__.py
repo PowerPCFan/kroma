@@ -1,22 +1,40 @@
-from .styles import style, lighten, darken, CustomStyle
+from .styles import style, CustomStyle
+from .color_utilities import lighten, darken, mix, random_color, invert, convert_to_grayscale
 from .exceptions import MixedColorTypesError
-from .utils import ansi_supported
+from .gv import ansi_supported
 from .enums import ANSIColors, HTMLColors, StyleType
 from .gradients import gradient, CustomGradient
 from . import palettes
 
 __name__ = "kroma"
 __all__ = [
+    # Styles
     "style",
+    "CustomStyle",
+
+    # Color Utilities
     "lighten",
     "darken",
-    "CustomStyle",
+    "mix",
+    "random_color",
+    "invert",
+    "convert_to_grayscale",
+
+    # Exceptions
     "MixedColorTypesError",
+
+    # Global Vars
     "ansi_supported",
+
+    # Enums
     "ANSIColors",
     "HTMLColors",
-    "palettes",
+    "StyleType",
+
+    # Gradients
     "gradient",
     "CustomGradient",
-    "StyleType"
+
+    # Palettes
+    "palettes"
 ]

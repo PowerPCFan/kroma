@@ -3,6 +3,11 @@ from typing import NamedTuple
 from .gv import ANSI
 
 
+class ColorMode(Enum):
+    ANSI = auto()
+    HTML = auto()
+
+
 class StyleType(Enum):
     FOREGROUND = auto()
     BACKGROUND = auto()
@@ -40,6 +45,12 @@ class RGB(NamedTuple):
     r: int
     g: int
     b: int
+
+
+class HSL(NamedTuple):
+    h: float
+    s: float
+    l: float
 
 
 class HTMLColors(Enum):

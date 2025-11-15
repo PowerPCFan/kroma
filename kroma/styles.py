@@ -1,21 +1,12 @@
-from enum import Enum
-from .enums import ANSIColors, HTMLColors, RGB
+from .enums import ANSIColors, HTMLColors, ColorMode
 from .utils import (
     _get_ansi_color_code,
     _get_ansi_color_code_with_formatting,
     _convert_html_hex_to_ansi,
     _convert_html_hex_to_ansi_with_formatting,
-    _style_base,
-    _convert_hex_code_to_rgb,
-    _convert_rgb_to_hex_code,
-    _clamp
+    _style_base
 )
 from .exceptions import MixedColorTypesError
-
-
-class ColorMode(Enum):
-    ANSI = "ansi"
-    HTML = "html"
 
 
 def _get_color_type(color) -> str:
@@ -115,29 +106,3 @@ def style(
         )
     else:
         raise Exception("An unknown error has occurred.")
-
-
-def lighten(color: str | HTMLColors, percentage: float) -> str:
-    p = percentage / 100.0
-    hex_color = (color.value if isinstance(color, HTMLColors) else color)
-
-    rgb = _convert_hex_code_to_rgb(hex_color)
-
-    new_r = _clamp(rgb.r + (255 - rgb.r) * p)
-    new_g = _clamp(rgb.g + (255 - rgb.g) * p)
-    new_b = _clamp(rgb.b + (255 - rgb.b) * p)
-
-    return _convert_rgb_to_hex_code(RGB(r=new_r, g=new_g, b=new_b))
-
-
-def darken(color: str | HTMLColors, percentage: float) -> str:
-    p = percentage / 100.0
-    hex_color = (color.value if isinstance(color, HTMLColors) else color)
-
-    rgb = _convert_hex_code_to_rgb(hex_color)
-
-    new_r = _clamp(rgb.r * (1 - p))
-    new_g = _clamp(rgb.g * (1 - p))
-    new_b = _clamp(rgb.b * (1 - p))
-
-    return _convert_rgb_to_hex_code(RGB(r=new_r, g=new_g, b=new_b))
