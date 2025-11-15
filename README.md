@@ -12,14 +12,13 @@ pip install kroma
 
 ## Why use Kroma?
 
-Kroma has many features that alternatives like `colorama` and `rich` lack, such as:
+Kroma is significantly better than libraries like `colorama`, and Kroma even has features that the very popular and powerful module `rich` lacks, such as:
 
-- A simple and well-documented API
-- Gradients
-- True Color support
-- Reusable style objects
-
-And more!
+- Dynamic color manipulation
+- Powerful gradient generation
+- Built-in color palettes
+- Global terminal color scheme management (via palettes)
+- Simple, intuitive, lightweight, and focused API
 
 ## Documentation
 
