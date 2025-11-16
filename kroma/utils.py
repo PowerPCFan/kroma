@@ -188,6 +188,14 @@ def _convert_hsl_to_rgb(hsl: HSL) -> RGB:
     return RGB(r=_clamp(r), g=_clamp(g), b=_clamp(b))
 
 
+def _convert_hex_to_hsl(hex_color: str) -> HSL:
+    return _convert_rgb_to_hsl(_convert_hex_code_to_rgb(hex_color))
+
+
+def _convert_hsl_to_hex(hsl: HSL) -> str:
+    return _convert_rgb_to_hex_code(_convert_hsl_to_rgb(hsl))
+
+
 def _style_base(
     text: str,
     *,  # Enforce keyword arguments from here on

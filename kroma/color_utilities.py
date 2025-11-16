@@ -1,40 +1,36 @@
-import random
 import secrets
-from .enums import HTMLColors, RGB
-# from .enums import HSL
+from .enums import HTMLColors, RGB, HSL
 from .utils import (
     _convert_hex_code_to_rgb,
     _convert_rgb_to_hex_code,
     _clamp,
-    # _convert_hsl_to_rgb,
-    # _convert_rgb_to_hsl
+    _convert_hex_to_hsl,
+    _convert_hsl_to_hex
 )
 
 
-def lighten(color: str | HTMLColors, percentage: float) -> str:
-    p = percentage / 100.0
+def lighten(color: str | HTMLColors, amount: int) -> str:
+    hsl = _convert_hex_to_hsl(color.value if isinstance(color, HTMLColors) else color)
+    new_l = _clamp((hsl.l + amount), 0, 100)
+
+    return _convert_hsl_to_hex(HSL(h=hsl.h, s=hsl.s, l=new_l))
+
+
+def darken(color: str | HTMLColors, amount: int) -> str:
+    return lighten(color, -amount)
+
+
+def saturate(color: str | HTMLColors, amount: int) -> str:
     hex_color = (color.value if isinstance(color, HTMLColors) else color)
+    hsl = _convert_hex_to_hsl(hex_color)
 
-    rgb = _convert_hex_code_to_rgb(hex_color)
+    new_s = _clamp((hsl.s + amount), 0, 100)
 
-    new_r = _clamp(rgb.r + (255 - rgb.r) * p)
-    new_g = _clamp(rgb.g + (255 - rgb.g) * p)
-    new_b = _clamp(rgb.b + (255 - rgb.b) * p)
-
-    return _convert_rgb_to_hex_code(RGB(r=new_r, g=new_g, b=new_b))
+    return _convert_hsl_to_hex(HSL(h=hsl.h, s=new_s, l=hsl.l))
 
 
-def darken(color: str | HTMLColors, percentage: float) -> str:
-    p = percentage / 100.0
-    hex_color = (color.value if isinstance(color, HTMLColors) else color)
-
-    rgb = _convert_hex_code_to_rgb(hex_color)
-
-    new_r = _clamp(rgb.r * (1 - p))
-    new_g = _clamp(rgb.g * (1 - p))
-    new_b = _clamp(rgb.b * (1 - p))
-
-    return _convert_rgb_to_hex_code(RGB(r=new_r, g=new_g, b=new_b))
+def desaturate(color: str | HTMLColors, amount: int) -> str:
+    return saturate(color, -amount)
 
 
 def mix(color1: str | HTMLColors, color2: str | HTMLColors, ratio: float = 50.0) -> str:
@@ -76,22 +72,3 @@ def random_color() -> str:
         return secrets.randbelow(256)
 
     return _convert_rgb_to_hex_code(RGB(r=_rdm(), g=_rdm(), b=_rdm()))
-
-
-# these are buggy so not implemented yet
-
-# def saturate(color: str | HTMLColors, percentage: float) -> str:
-#     hex_color = (color.value if isinstance(color, HTMLColors) else color)
-#     hsl = _convert_rgb_to_hsl(_convert_hex_code_to_rgb(hex_color))
-
-#     p = percentage / 100.0
-#     new_s = _clamp(hsl.s + (100 - hsl.s) * p, 0, 100)
-
-#     return _convert_rgb_to_hex_code(_convert_hsl_to_rgb(HSL(h=hsl.h, s=new_s, l=hsl.l)))
-
-
-# def desaturate(color: str | HTMLColors, percentage: float) -> str:
-#     hex_color = (color.value if isinstance(color, HTMLColors) else color)
-#     hsl = _convert_rgb_to_hsl(_convert_hex_code_to_rgb(hex_color))
-
-#     return _convert_rgb_to_hex_code(_convert_hsl_to_rgb(HSL(h=hsl.h, s=_clamp(hsl.s * (1 - (percentage / 100.0)), 0, 100), l=hsl.l)))

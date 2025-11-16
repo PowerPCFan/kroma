@@ -17,8 +17,6 @@
 - In Docs / Readme: Highlight USPs (unique selling points)
 - 256-Color Support (8-bit)
   - Great for if you want a wider range of colors but need compatibility with older terminals / don't want to use True Color
-- Inline markup like Rich
-  - i'm not a fan of it but it's a very popular option
 - Cache frequently used and/or heavy functions with @lru_cache to improve performance
 
 ## Improvements / Fixes
