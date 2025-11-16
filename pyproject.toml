@@ -7,7 +7,7 @@ name = "kroma"
 # at one point i wiped a bunch of releases off of pypi due to inaccuracies and critical bugs.
 # all v1 releases were removed, and v2 starts at 2.0.1
 # additionally, v2.1.1 was removed due to some inaccuracies in the README
-version = "v2.2.1"
+version = "v2.2.2"
 description = "A lightweight and powerful colors library for terminal output in Python."
 readme = "README.md"
 requires-python = ">=3.10"
