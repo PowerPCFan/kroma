@@ -1,5 +1,5 @@
 from .styles import style, CustomStyle
-from .color_utilities import lighten, darken, mix, random_color, invert, convert_to_grayscale
+from .color_utilities import lighten, darken, mix, random_color, invert, convert_to_grayscale, saturate, desaturate
 from .exceptions import MixedColorTypesError
 from .gv import ansi_supported
 from .enums import ANSIColors, HTMLColors, StyleType
@@ -19,6 +19,8 @@ __all__ = [
     "random_color",
     "invert",
     "convert_to_grayscale",
+    "saturate",
+    "desaturate",
 
     # Exceptions
     "MixedColorTypesError",
