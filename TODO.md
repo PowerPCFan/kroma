@@ -18,6 +18,7 @@
 - 256-Color Support (8-bit)
   - Great for if you want a wider range of colors but need compatibility with older terminals / don't want to use True Color
 - Cache frequently used and/or heavy functions with @lru_cache to improve performance
+- Use a different color space for mixing colors, since RGB/sRGB is gamma corrected causing some inaccuracies in mixing
 
 ## Improvements / Fixes
 - Break up functions and improve code in general
