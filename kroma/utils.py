@@ -51,32 +51,32 @@ def _convert_rgb_to_ansi_sequence(rgb: RGB, type: StyleType) -> str:
     rgb_sequence = f";2;{r};{g};{b}m"
     color_type = ("38" if type == StyleType.FOREGROUND else "48")
 
-    return ANSI + color_type + rgb_sequence
+    return str(ANSI) + str(color_type) + str(rgb_sequence)
 
 
 def _convert_html_hex_to_ansi(text: str, color: HTMLColors | str, type: StyleType) -> str:
-    color = (color.replace("#", "") if isinstance(color, str) else color.value).lower().strip()
+    color = (str(color).replace("#", "") if isinstance(color, str) else str(color.value)).lower().strip()
 
     rgb = _convert_hex_code_to_rgb(color)
     ansi_color = _convert_rgb_to_ansi_sequence(rgb, type)
 
-    return _get_color_if_supported(ansi_color) + _fix_text(text) + _get_color_if_supported(RESET)
+    return str(_get_color_if_supported(ansi_color)) + str(_fix_text(text)) + str(_get_color_if_supported(RESET))
 
 
 def _get_ansi_color_code(text: str, color: ANSIColors, type: StyleType) -> str:
     color_code = _get_color_if_supported(color.value)
     if type == StyleType.BACKGROUND:
         color_code = color_code.replace("3", "4").replace("9", "10")
-    return color_code + _fix_text(text) + _get_color_if_supported(RESET)
+    return str(color_code) + str(_fix_text(text)) + str(_get_color_if_supported(RESET))
 
 
 def _get_ansi_color_code_with_formatting(text: str, color: ANSIColors, type: StyleType, formats: list[TextFormat] | None = None) -> str:
     color_code = _get_color_if_supported(color.value)
     if type == StyleType.BACKGROUND:
         color_code = color_code.replace("3", "4").replace("9", "10")
-    format_codes = "".join([_get_color_if_supported(fmt.value) for fmt in formats]) if formats else ""
+    format_codes = "".join([str(_get_color_if_supported(fmt.value)) for fmt in formats]) if formats else ""
     reset_code = _get_color_if_supported(RESET)
-    return color_code + format_codes + _fix_text(text) + reset_code
+    return str(color_code) + str(format_codes) + str(_fix_text(text)) + str(reset_code)
 
 
 def _convert_html_hex_to_ansi_with_formatting(text: str, color: HTMLColors | str, type: StyleType, formats: list[TextFormat] | None = None) -> str:
@@ -91,16 +91,16 @@ def _convert_html_hex_to_ansi_with_formatting(text: str, color: HTMLColors | str
     else:
         color_code = colored_text
 
-    format_codes = "".join([_get_color_if_supported(fmt.value) for fmt in formats])
-    return color_code + format_codes + _fix_text(text) + reset_code
+    format_codes = "".join([str(_get_color_if_supported(fmt.value)) for fmt in formats])
+    return str(color_code) + str(format_codes) + str(_fix_text(text)) + str(reset_code)
 
 
 def _apply_text_formatting(text: str, formats: list[TextFormat] | None = None) -> str:
     if not formats:
         return text
 
-    format_codes = "".join([_get_color_if_supported(fmt.value) for fmt in formats])
-    return format_codes + _fix_text(text) + _get_color_if_supported(RESET)
+    format_codes = "".join([str(_get_color_if_supported(fmt.value)) for fmt in formats])
+    return str(format_codes) + str(_fix_text(text)) + str(_get_color_if_supported(RESET))
 
 
 # this function is AI-generated since i don't even know where to BEGIN when converting rgb to hsl lmao
@@ -223,23 +223,23 @@ def _style_base(
 
     if foreground is None and background is None:
         if formats:
-            return _apply_text_formatting(text, formats)
+            return _apply_text_formatting(str(text), formats)
         else:
-            return text
+            return str(text)
     elif foreground is not None and background is None:
         if formats:
-            return color_func_with_formatting(text, foreground, StyleType.FOREGROUND, formats)
+            return color_func_with_formatting(str(text), foreground, StyleType.FOREGROUND, formats)
         else:
-            return color_func(text, foreground, StyleType.FOREGROUND)
+            return color_func(str(text), foreground, StyleType.FOREGROUND)
     elif foreground is None and background is not None:
         if formats:
-            return color_func_with_formatting(text, background, StyleType.BACKGROUND, formats)
+            return color_func_with_formatting(str(text), background, StyleType.BACKGROUND, formats)
         else:
-            return color_func(text, background, StyleType.BACKGROUND)
+            return color_func(str(text), background, StyleType.BACKGROUND)
     else:
         assert foreground is not None and background is not None
         if formats:
-            fg_formatted = color_func_with_formatting(text, foreground, StyleType.FOREGROUND, formats)
+            fg_formatted = color_func_with_formatting(str(text), foreground, StyleType.FOREGROUND, formats)
             return color_func_with_formatting(fg_formatted, background, StyleType.BACKGROUND, None)
         else:
-            return color_func(color_func(text, foreground, StyleType.FOREGROUND), background, StyleType.BACKGROUND)
+            return str(color_func(str(color_func(str(text), foreground, StyleType.FOREGROUND)), background, StyleType.BACKGROUND))
